@@ -1,0 +1,134 @@
+@import '../../theme/variables.scss';
+
+.emptyCartWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  min-height: 100%;
+  padding-bottom: 32px;
+  .kitchenImg {
+    background-image: url('https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,e_trim/cart_empty_ipmau1');
+    background-repeat: no-repeat;
+    min-height: 200px;
+    width: 100%;
+    padding-bottom: 60%;
+    background-size: contain;
+    background-position: center center;
+    margin: 0 auto;
+  }
+  .emptyCartTxt {
+    margin-top: 24px;
+    padding: 0 60px;
+    .cartTxt1 {
+      color: #535665;
+    }
+    .cartTxt2 {
+      color: #a9abb2;
+      margin-top: 16px;
+    }
+  }
+}
+
+.cartHeader {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  z-index: 10;
+  transition: transform 0.3s ease-out;
+  will-change: transform;	
+  .cartHeaderTop {
+    height: 56px;
+    // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding-left: 10px;
+  }
+}
+
+.cartBody {
+  margin-top: 56px;
+  margin-bottom: 80px;
+}
+.cartItems {
+  padding: 10px;
+  padding-bottom: 0;
+}
+.suggestionsWrap {
+  padding: 0px 12px 10px;
+  .quoteImg {
+    top: 20px;
+    left: 20px;
+    width: 15px;
+    height: 10px;
+    color: #282c3f;
+  }
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+}
+.couponWrapper {
+  padding: 16px 12px;
+  .couponImg {
+    position: relative;
+    stroke: currentColor;
+    fill: #3d4152;
+    stroke-width: 0;
+  }
+  .couponCode {
+    margin-left: 8px;
+    line-height: 18px;
+  }
+  .arrowRight {
+    width: 6px;
+    height: 6px;
+    border: solid #7a7a7a;
+    border-width: 0 2px 2px 0;
+    transform: rotate(-45deg);
+  }
+}
+.BillDetails {
+  padding: 10px 15px 10px 10px;
+  margin-bottom: 20px;
+  position: relative;
+  .BillHeading {
+    color: #282c3f;
+    margin-bottom: 10px;
+  }
+  .itemTotal, .restaurantCharge {
+    margin-bottom: 10px;
+    .itemTotalValue, .pa4, .charges {
+      color: #686b78 !important;
+    }
+  }
+  .TotalDiscount {
+    margin-bottom: 10px;
+    .pa4, .discountValue {
+      color: rgb(96, 178, 69) !important;
+    }
+  }
+  &:after {
+    content: " ";
+    background: -webkit-linear-gradient(135deg,#f4f4f5 7px,transparent 0),-webkit-linear-gradient(45deg,#f4f4f5 7px,transparent 0);
+    background: -o-linear-gradient(135deg,#f4f4f5 7px,transparent 0),-o-linear-gradient(45deg,#f4f4f5 7px,transparent 0);
+    background: linear-gradient(-45deg,#f4f4f5 7px,transparent 0),linear-gradient(45deg,#f4f4f5 7px,transparent 0);
+    background-position: left bottom;
+    background-repeat: repeat-x;
+    background-size: 12px 15px;
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 14px;
+    bottom: -14px;
+  }
+}
+.green-color {
+  color: rgb(96, 178, 69) !important;
+}

@@ -1,0 +1,135 @@
+@import './variables.scss';
+$btn-height: 32px;
+$btn-width: 220px;
+
+.btn-icon {
+  border: none;
+  background: transparent;
+}
+
+.btn-pernia {
+  background: $pernia-color;
+  color: white;
+  border-radius: 0;
+  border: none;
+  padding: 6px 12px;
+}
+.btn-pernia-2 {
+  background: $pernia-color;
+  color: white !important;
+  border-radius: 0;
+  border: none;
+  padding: 6px 0; 
+  width: 204px;
+}
+
+.btn-pernia-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $btn-width;
+  height: $btn-height;
+  background-color: $pernia-black-color;
+  color: white;
+  border: none;
+  font-size: 12px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.btn-pernia-secondry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $btn-width;
+  border: 1.2px solid $pernia-black-color;
+  font-size: 12px;
+  background: white;
+  color: $pernia-black-color;
+  background: white;
+  text-transform: uppercase;
+  padding: 0 20px;
+  text-align: center;
+}
+// width more than 1919px
+@media only screen and (min-width: $break-point-lg) {
+  .btn-pernia-primary, .btn-pernia-secondry {
+    height: 48px;
+    font-size: 16px;
+    &.btn-xs {
+      height: 32px;
+      font-size: 12px;
+    }
+    &.btn-sm {
+      height: 36px;
+      font-size: 13px;
+    }
+    &.btn-lg {
+      height: 40px;
+      font-size: 14px;
+    }
+  }
+  .btn-pernia-2 {
+    width: 264px;
+    padding: 10px 0;
+  }
+}
+// width between 1439px and 1919px
+@media only screen and (min-width: $break-point-md) and (max-width: $break-point-lg) {
+  .btn-pernia-primary, .btn-pernia-secondry {
+    height: 40px;
+    font-size: 14px;
+    &.btn-xs {
+      height: 28px;
+      font-size: 10px;
+    }
+    &.btn-sm {
+      height: 32px;
+      font-size: 11px;
+    }
+    &.btn-lg {
+      height: 36px;
+      font-size: 12px;
+      line-height: 1.33;
+      letter-spacing: 0.4px;
+    }
+  }
+  .btn-pernia-2 {
+    width: 204px;
+    padding: 6px 0;
+  }
+}
+// width between 1279px and 1439px
+@media only screen and (min-width: $break-point-sm) and (max-width: $break-point-md) {
+  .btn-pernia-primary, .btn-pernia-secondry {
+    height: 36px;
+    font-size: 13px;
+    &.btn-xs {
+      height: 24px;
+      font-size: 8px;
+    }
+    &.btn-sm {
+      height: 28px;
+      font-size: 9px;
+    }
+    &.btn-lg {
+      height: 32px;
+      font-size: 11px;
+    }
+  }
+  .btn-pernia-2 {
+    width: 184px;
+    padding: 4px 0;
+  }
+}
+// width between 959px and 1279px
+@media only screen and (max-width: $break-point-sm) {
+  .btn-pernia-primary, .btn-pernia-secondry {
+    height: 32px;
+    font-size: 12px;
+  }
+  .btn-pernia-2 {
+    width: 168px;
+    padding: 4px 0;
+  }
+}

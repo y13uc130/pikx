@@ -1,0 +1,43 @@
+form {
+  margin: 15px 0;
+  .input-container-with-header {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    @media only screen and (min-width: $break-point-lg) {
+      width: 336px;
+    }
+    @media only screen and (min-width: $break-point-md) and (max-width: $break-point-lg) {
+      width: 246px;
+    }
+    @media only screen and (min-width: $break-point-sm) and (max-width: $break-point-md) {
+      width: 216px;
+    }
+    @media only screen and (max-width: $break-point-sm) {
+      width: 192px;
+    }
+
+    .form-field-header {
+      // height: 20px;
+      margin-bottom: 8px;
+      @media only screen and (max-width: $break-point-sm) {
+        margin: 0px;
+      }
+    }
+    .form-error-msg {
+      margin-top: 2px;
+      color: red;
+      font-size: 12px;
+    }
+  }
+  .input-container {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    .form-error-msg {
+      color: red;
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,130 @@
+@import './../../theme/variables.scss';
+
+.NotFound {
+  .NotFoundFormContent {
+    padding-top: 24px;
+    padding-bottom: 64px;
+    background: white;
+    h3 {
+      font-size: 18px;
+      letter-spacing: -0.3px;
+      line-height: 1.33;
+      margin-bottom: 8px;
+    }
+    p {
+      color: $pernia-black-color;
+      font-size: 9px;
+      line-height: 1.33;
+    }
+    .dynamicImgContainer {
+      height: 324px;
+      background: $placeholder-color;
+    }
+    .DisableDeisgnerForm {
+      padding-bottom: 40px;
+    }
+  }
+  .RelatedProducts {
+    background: $placeholder-color;
+    min-height: 200px;
+    .RelatedProductsTitle {
+      color: #000000;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+  }
+  @media only screen and (min-width: $break-point-lg) {
+    .ProductDetailRight {
+      > div {
+        margin-bottom: 48px;
+      }
+      h3 {
+        font-size: 14px;
+      }
+      .ProductDesc {
+        font-size: 16px;
+      }
+      p, .ProductHelpLinks {
+        font-size: 14px;
+      }
+      .ProductTitle {
+        font-size: 32px;
+        letter-spacing: 0.8px;
+      }
+      .ProductPrice {
+        margin: 16px 0 48px;
+        font-size: 24px;
+        letter-spacing: 0.4px;
+        .DiscountPriceRound {
+          padding: 4px 8px;
+        }
+      }
+      .ProductSizes {
+        h3 {
+          font-size: 16px;
+        }
+        .btn-icon {
+          font-size: 16px;
+        }
+        .ProductSizesOptions {
+          > div {
+            font-size: 14px;
+            padding: 17.5px 20.5px;
+            letter-spacing: 0.6px;
+            margin-right: 16px;
+            margin-top: 16px;
+          }
+        }
+      }
+      .ProductInfo {
+        > div {
+          height: 92px;
+          letter-spacing: 0.6px;
+          h3 {
+            font-size: 16px;
+          }
+          p {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    .RelatedProducts {
+      .RelatedProductsTitle {
+        font-size: 30px;
+        letter-spacing: 0.4px;
+        padding: 64px 0 32px;
+      }
+    }
+  }
+  
+  @media only screen and (min-width: $break-point-md) and (max-width: $break-point-lg) {
+    .RelatedProducts {
+      .RelatedProductsTitle {
+        font-size: 26px;
+        letter-spacing: 0.4px;
+        padding: 64px 0 32px;
+      }
+    }
+  }
+  
+  @media only screen and (min-width: $break-point-sm) and (max-width: $break-point-md) {
+    .RelatedProducts {
+      .RelatedProductsTitle {
+        font-size: 24px;
+        letter-spacing: 0.4px;
+        padding: 40px 0 32px;
+      }
+    }
+  }
+  
+  @media only screen and (max-width: $break-point-sm) {
+    .RelatedProducts {
+      .RelatedProductsTitle {
+        font-size: 20px;
+        letter-spacing: 0.3px;
+        padding: 32px 0 16px;
+      }
+    }
+  }
+}

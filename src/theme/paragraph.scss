@@ -1,0 +1,46 @@
+@import './variables.scss';
+
+.pa1, .pa2, .pa3, .pa4, .pa5, .pa5, .pa6, .pa7 {
+  color: $stylist-primary-color;
+}
+.pa1-grey, .pa2-grey, .pa3-grey, .pa4-grey, .pa5-grey, .pa5-grey, .pa6-grey, .pa7-grey {
+  color: $stylist-dark-grey-color !important;
+}
+.pa1-sec, .pa2-sec, .pa3-sec, .pa4-sec, .pa5-sec, .pa5-sec, .pa6-sec, .pa7-sec {
+  color: $stylist-secondary-color !important;
+}
+.pa1-white, .pa2-white, .pa3-white, .pa4-white, .pa5-white, .pa6-white, .pa7-white {
+  color: #fff !important;
+} 
+
+.pa1, .pa1-grey, .pa1-sec, .pa1-white {
+  font-size: 16px !important;
+  line-height: 1.63;
+}
+
+.pa2, .pa2-grey, .pa2-sec, .pa2-white {
+  font-size: 14px !important;
+  // line-height: 1.71;
+}
+
+.pa3, .pa3-grey, .pa3-sec, .pa3-white {
+  font-size: 13px !important;
+  line-height: 1.69;
+}
+.pa4, .pa4-grey, .pa4-sec, .pa4-white {
+  font-size: 12px !important;
+  line-height: 1.67;
+}
+.pa5, .pa5-grey, .pa5-sec, .pa5-white {
+  font-size: 11px !important;
+  line-height: 1.64;
+}
+
+.pa6, .pa6-grey, .pa6-sec, .pa6-white {
+  font-size: 10px !important;
+  line-height: 1.8;
+}
+.pa7, .pa7-grey, .pa7-sec, .pa7-white {
+  font-size: 9px !important;
+  line-height: 1.78;
+}
