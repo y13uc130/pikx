@@ -10,7 +10,7 @@ class EachDishItem extends Component {
     let result = 0;
     if(cart_items && !!cart_items.length) {
       cart_items && !!cart_items.length && cart_items.map((item)=>{
-        if(item.id===dish.id) {
+        if(item._id===dish._id) {
           result= item.count; 
         }
         return item;
@@ -18,7 +18,7 @@ class EachDishItem extends Component {
       return result;
     } 
     return (
-    <div className={classnames("flex xs4 dishCountnoValue pa4-sec layout justify-center align-center", 'dishCountValue', 'count_' + dish.id)}>
+    <div className={classnames("flex xs4 dishCountnoValue pa4-sec layout justify-center align-center", 'dishCountValue', 'count_' + dish._id)}>
       {result}
     </div>
     );
@@ -59,14 +59,14 @@ class EachDishItem extends Component {
           </div>}
         </div>
         <div className="flex xs2 layout align-start justify-center addBtnSize">
-          {addBtnChange && !addBtnChange.includes(dish.id) && <span onClick={() => handleAddClick(dish)} className={classnames("addBtn layout align-center justify-center pa4-sec", 'add_' + dish.id)}>ADD</span>}
-          {addBtnChange && !!addBtnChange.includes(dish.id) && (<span className="addBtn withCount layout align-center justify-center pa4-sec prel">
+          {addBtnChange && !addBtnChange.includes(dish._id) && <span onClick={() => handleAddClick(dish)} className={classnames("addBtn layout align-center justify-center pa4-sec", 'add_' + dish._id)}>ADD</span>}
+          {addBtnChange && !!addBtnChange.includes(dish._id) && (<span className="addBtn withCount layout align-center justify-center pa4-sec prel">
             <div onClick={(e) => handleRemoveItem(dish, e)} className="flex xs4 minus layout justify-center align-center"></div>
             <div className="textCount">{this.itemCountRender(dish)}</div>
             <div onClick={(e) => handleAddOneMore(dish, e)} className="flex xs4 pa1-sec layout justify-center align-center plusBtn">+</div>
           </span>)}
         </div>
-        {!!cartPage && <div className="ProductPrice">
+        {!!cartPage && <div className="ProductPrice xs2 layout column align-end">
           {dishTotalPrice && <div className={classnames("InitialPrice pa4-grey", !dishTotalOfferPrice && 'pa3')}>₹{dishTotalPrice}</div>}
           {dishTotalOfferPrice && <div className="SpecialPrice pa3">₹{dishTotalOfferPrice}</div>}
         </div>}

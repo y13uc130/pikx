@@ -31,7 +31,7 @@ class MenuPage extends Component {
       })
       let cartitem_ids= []
       cart_items.map((dish)=> {
-        cartitem_ids.push(dish.id);
+        cartitem_ids.push(dish._id);
         return dish;
       })
       this.setState({
@@ -44,7 +44,7 @@ class MenuPage extends Component {
       })
     }
   }
-  handleAddClick= ({name,id, price, offerPrice, image, type}) => {
+  handleAddClick= ({name,_id, price, offerPrice, image, type}) => {
     if(this.state.noItemAdded) {
       this.setState({
         noItemAdded: false
@@ -52,7 +52,7 @@ class MenuPage extends Component {
     }
     let itemToAdd = {
       name,
-      id,
+      _id,
       offerPrice: offerPrice ? parseInt(offerPrice) : 0,
       price: parseInt(price),
       count: 1,
@@ -64,7 +64,7 @@ class MenuPage extends Component {
       totalPayable: this.state.totalPayable+amountToAdd
     })
     this.setState({
-      addBtnChange: [...this.state.addBtnChange, id],
+      addBtnChange: [...this.state.addBtnChange, _id],
       cart_items: [...this.state.cart_items, itemToAdd],
       totalCartItems: this.state.totalCartItems+1,
     })
@@ -73,12 +73,12 @@ class MenuPage extends Component {
     let cart_items = [...this.state.cart_items];
     let removeFromTotalPayable = 0;
     cart_items = cart_items.filter((item)=> {
-      if(item.id===dish.id) {
+      if(item._id===dish._id) {
         --item.count;
         removeFromTotalPayable = item.offerPrice ? item.offerPrice : item.price;
         if(item.count===0) {
           let resultbtns = [...this.state.addBtnChange];
-          resultbtns = resultbtns.filter(id=>id!==dish.id);
+          resultbtns = resultbtns.filter(_id=>_id!==dish._id);
           if(resultbtns && !resultbtns.length) {
             this.setState({
               noItemAdded: true,
@@ -105,7 +105,7 @@ class MenuPage extends Component {
     let cart_items = [...this.state.cart_items];
     let addToTotalPayable = 0;
     cart_items = cart_items.map((item)=> {
-      if(item.id===dish.id) {
+      if(item._id===dish._id) {
         item.count=item.count+1;
         addToTotalPayable = item.offerPrice ? item.offerPrice : item.price;
       }
@@ -148,7 +148,9 @@ class MenuPage extends Component {
       totalCartItems,
       totalPayable,
       loading,
+      addBtnChange
     } = this.state;
+    console.log("addtobtn",addBtnChange);
     const {
       data
     } = this.props;
@@ -161,11 +163,11 @@ class MenuPage extends Component {
       <div className="MenuPage">
         <div className="Categories">
           {
-            data && Array.isArray(data.category) && !!data.category.length && data.category.map((category)=> {
+            Array.isArray(data) && !!data.length && data.map((category)=> {
               return (
                 <React.Fragment>
                   <div className="EachCategory" >
-                    <div className="h2">{category.title}</div>
+                    <div className="h2">{category._id}</div>
                     <div className="borderBottom"></div>
                     <div className="dishItems">
                       {category.dish.map((dish, index)=>{

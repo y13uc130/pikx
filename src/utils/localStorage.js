@@ -50,9 +50,6 @@ export function getIsDevelopment() {
   return getValue('isDevelopment');
 }
 
-export function clearLocalStorage() {
-  removeKey('userID');
-  removeKey('sessionId');
-  removeKey('expries');
-  removeKey('loginProvider');
+export function clearBookingId() {
+  removeKey('booking_id');
 }

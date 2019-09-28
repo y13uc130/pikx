@@ -1,38 +1,36 @@
 import React, { Component } from 'react';
-import { hydrate } from 'react-dom';
 import { createBrowserHistory } from 'history';
-import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { BrowserRouter } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
-import Loadable from 'react-loadable';
-import { Router, Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import configureStore from './store/configureStore';
-import routes from './routes';
 // Import your global styles here
 import './styles.scss';
 import './theme/style.scss';
-import Home from './pages/Home';
 import { asyncHome } from './pages';
 import Cart from './pages/Cart';
+import BookingStatus from './pages/BookingStatus/BookingStatus';
+import { NotFound } from './pages/NotFound';
 const history = createBrowserHistory();
-// Get the initial state from server-side rendering
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(history, initialState);
 
 class App extends Component {
-
-	render() {
+  render() {
+    console.log('initial state', initialState, store);
 		return (
 			<div className="App">
 				<Provider store={store}>
         <ConnectedRouter history={history}>
           <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={asyncHome} />
-            <Route exact path="/checkout/cart" component={Cart} />
-          </Switch>
+            <Switch>
+              <Route exact path="/booking/:id" component={BookingStatus} />
+              <Route exact path='/error' component={NotFound} />
+              <Route exact path="/checkout/cart" component={Cart} />
+              <Route exact path="/" component={asyncHome} />
+              <Redirect from='*' to="/" />
+            </Switch>
           </BrowserRouter>
         </ConnectedRouter>
       </Provider>
