@@ -1,0 +1,37 @@
+@import "./normalize.scss";
+@import "./common.scss";
+@import "./flex.scss";
+@import "./variables.scss";
+@import "./margin-padding.scss";
+@import "./buttons.scss";
+@import "./form.scss";
+@import "./controls.scss";
+@import "./heading.scss";
+@import "./paragraph.scss";
+@import "./static.scss";
+@import "./color.scss";
+@import "./carouselButtons.scss";
+
+a { text-decoration: none; }
+p,h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+  padding: 0;
+}
+.ex-bold {
+  font-family: GreycliffCF-ExtraBold;
+  font-weight: 700;
+}
+.bold {
+  font-family: GreycliffCF-Bold;
+  font-weight: 500;
+}
+.font-normal {
+  font-family: 'GreycliffCF-Medium';
+  font-weight: 500;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  background: white;
+}

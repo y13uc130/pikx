@@ -1,0 +1,116 @@
+@import '../../theme/variables.scss';
+
+
+.dishBody.cartPageHeading {
+  &:after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    background: #282c3f;
+    width: 40px;
+    height: 2px;
+  }
+}
+.EachItem {
+  padding: 8px 3px;
+  .dishBody {
+    position: relative;
+    padding: 0 8px;
+  }
+  .addBtnSize {
+    width: 82px;
+    max-width: 82px !important;
+    height: 26px;
+  }
+  .addBtn {
+    border: 1px solid #d4d5d9;
+    border-radius: 0px;
+    height: 26px;
+    .pa1-sec {
+      font-size: 150% !important;
+      line-height: 1;
+      font-family: ProximaNova,Arial,Helvetica Neue,sans-serif;
+    }
+    .dishCountnoValue{
+      transform: translateY(10px);
+      transition: transform .3s;
+      opacity: 0;
+      &.clicked {
+        opacity: 1;
+        transform: translateY(0px);
+        transition: transform .3s;
+      }
+    }
+    .minus {
+      cursor: pointer;
+      position: absolute;
+      left: 0;
+      width: 27.33333px;
+      height: 100%;
+      text-align: center;
+      &:before {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 10px;
+        background-color: #bebfc5;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate3d(-50%,-50%,0);
+        transform: translate3d(-50%,-50%,0);
+      }
+    }
+    .textCount {
+      position: absolute;
+      left: 27.33333px;
+      width: 27.33333px;
+      text-align: center;
+      height: 100%;
+      line-height: 24px;
+      color: #60b246;
+      font-weight: 600;
+    }
+    .plusBtn {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      width: 27.33333px;
+      color: #60b246;
+      font-weight: 500;
+      height: 100%;
+      text-align: center;
+      line-height: 24px;
+      font-size: 1.5rem;
+    }
+  }
+  .addBtn.withCount {
+    // padding: 3px;
+    border-radius: 1px;
+  }
+}
+
+.MenuPage {
+  .Categories {
+    margin-bottom: 50px;
+    .EachCategory {
+      padding: 12px;
+    }
+  }
+  .cartDesign {
+    padding: 6px 16px 6px 16px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform .3s;
+    &.showcartpreview {
+      opacity: 1;
+      transform: translateY(0px);
+      transition: transform .3s;
+    }
+    .PipeBtwText {
+      font-size: 13px;
+      color: #fff;
+    }
+  }
+}

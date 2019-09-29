@@ -1,0 +1,240 @@
+@import './variables.scss';
+.no-wrap {
+  white-space: nowrap;
+}
+.prel {
+  position: relative;
+}
+.img-resp {
+  width: 100%;
+  height: auto;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.list-unstyled {
+  list-style-type: none;
+}
+.float-right{
+  float: right;
+}
+
+.float-left{
+  float: left;
+}
+
+.block {
+  display: block; 
+}
+
+.ellipsis-two-line {
+  display: -webkit-box;
+  line-clamp: 2;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.ellipsis-three-line {
+  display: -webkit-box;
+  line-clamp: 3;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.pernia-color {
+  color: $pernia-color !important;
+}
+
+.disabled {
+  color: #bbbbbb;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.full-height {
+  height: 100% !important;
+}
+.full-width {
+  width: 100% !important;
+}
+
+.pernia-color-hover:hover {
+  color: $pernia-color !important;
+}
+.arrow-icon {
+  transform: translateX(-50%);
+  border: 6px solid #c2c2c2;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  width: 0;
+  height: 0;
+  margin: 0;
+  background: transparent;
+}
+.arrow-icon.arrow-down-icon {
+  border-top-color: #c2c2c2;
+  position: relative;
+  top: 3px;
+}
+.arrow-icon.arrow-up-icon {
+  border-bottom-color: #c2c2c2;
+  position: relative;
+  top: -3px;
+}
+.ProductPrice {
+  letter-spacing: 0.2px;
+  font-size: 14px;
+  .SpecialPrice {
+    color: #212121;
+    margin-right: 5px;
+  }
+  .InitialPrice {
+    color: #757575;
+    text-decoration: line-through;
+    margin-right: 5px;
+  }
+  .DiscountPriceRound {
+    padding: 2px 5px;
+    background: #ed3897;
+    color: white;
+    font-size: 10px;
+  }
+}
+.line-through {
+  text-decoration: line-through;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.error-msg {
+  color: red !important;
+  font-size: 12px !important;
+  margin-top: 5px;
+}
+.success-msg {
+  color: green !important;
+  font-size: 12px !important;
+  margin-top: 5px;
+}
+.border-t-grey {
+  border-top: 1px solid $placeholder-bg-color;
+}
+
+.border-l-grey {
+  border-left: 1px solid $placeholder-bg-color;
+}
+.b-b-none {
+  border-bottom: none !important;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+}
+
+.borderLine {
+  height: 8px;
+  background-color: #f4f4f4;
+  opacity: 0.5;
+}
+.borderBottom {
+  padding-top: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f4f4f4;
+  box-sizing: border-box;
+}
+
+//veg, non-veg food icons (green, red)
+
+.foodTypeSymbol.vegColor {
+  border: 1px solid #339a33;
+  &:before {
+    background-color: #339a33;
+  }
+}
+.foodTypeSymbol.nonvegColor {
+  border: 1px solid #ad4728;
+  &:before {
+    background-color: #ad4728;
+  }
+}
+.foodTypeSymbol {
+  min-width: 12px;
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+  &:before {
+    content: '';
+    height: 6px;
+    width: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 2px 0 0 2px;
+  }
+}
+
+//sprite image
+
+.pikx-sprite {
+  background: url('/psl_static/images/img-sprite.png') no-repeat;
+}
+.cart-icon {
+  height: 20px;
+  width: 21px;
+  background-position: -70px -17px;
+}
+
+//end-of sprite image
+
+//cart btn
+
+
+.cart-preview {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  background: #60b246;
+  z-index: 9;
+
+}
+
+.iconNew {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}

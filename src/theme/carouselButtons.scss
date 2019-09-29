@@ -1,0 +1,47 @@
+.CustomCarousel {
+  .slick-next {
+    right: -35px;
+  }
+  .slick-prev {
+    left: -35px;
+  }
+  .dynamicImgContainer {
+    background: $placeholder-color;
+  }
+  .dynamicImgContainer {
+    min-height: 200px;
+  }
+  .image-gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.26));
+  }
+  .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+    background: rgba(0, 0, 0, 0.1) !important;
+  }
+  .slick-arrow.slick-disabled {
+    opacity: 0.5;
+  }
+  .slick-prev, .slick-next {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+    // height: 40px;
+    // width: 40px;
+  }
+  .slick-next {
+    right: -45px;
+  }
+  .slick-prev {
+    left: -45px;
+  }
+  .slick-prev:before, .slick-next:before {
+    display: none;
+  }
+  .slick-slide > div {
+    margin-bottom: 2px;
+  }
+}
