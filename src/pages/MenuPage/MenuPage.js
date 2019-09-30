@@ -24,16 +24,21 @@ class MenuPage extends Component {
       totalPayable: 0,
       loading: false
     }
+    this.AddToCartTime = false;
+    this.AddMoreToCartTime = false;
+    this.RemoveFromCartTime = false;
   }
   componentDidMount() {
     const { cart_items, totalPayable, totalCartItems } = this.props;
     if(cart_items && !!cart_items.length) {
       this.mapDataToState(cart_items, totalPayable, totalCartItems);
     } else {
-      let cartItems = getCartItems();
-      let total_cartItems = getTotalCartItems();
-      let total_payable = getTotalPayable();
-      this.mapDataToState(cartItems, total_payable, total_cartItems);
+      let cartItems = getCartItems() ? getCartItems(): [];
+      let total_cartItems = getTotalCartItems() ? getTotalCartItems(): 0;
+      let total_payable = getTotalPayable() ? getTotalPayable(): 0;
+      if(cartItems && !!cartItems.length) {
+        this.mapDataToState(cartItems, total_payable, total_cartItems);
+      }
     }
   }
   handleAddClick= ({name,_id, price, offerPrice, image, type}) => {
@@ -55,19 +60,21 @@ class MenuPage extends Component {
     this.setState({
       totalPayable: this.state.totalPayable+amountToAdd
     })
+    console.log('state of cart', this.state.totalCartItems);
     this.setState({
       addBtnChange: [...this.state.addBtnChange, _id],
       cart_items: [...this.state.cart_items, itemToAdd],
       totalCartItems: this.state.totalCartItems+1,
     })
-    setTimeout(()=>{
+    !!this.AddToCartTime && clearTimeout(this.AddToCartTime);
+    this.AddToCartTime = setTimeout(()=>{
       const {
         cart_items,
         totalPayable,
         totalCartItems
       } = this.state;
       this.setDataOnLocalStorage(cart_items, totalPayable, totalCartItems);
-    },100);
+    },200);
   }
   handleRemoveItem = (dish)=> {
     let cart_items = [...this.state.cart_items];
@@ -100,7 +107,8 @@ class MenuPage extends Component {
       totalCartItems: this.state.totalCartItems-1,
       totalPayable: this.state.totalPayable-removeFromTotalPayable
     })
-    setTimeout(()=>{
+    !!this.RemoveFromCartTime && clearTimeout(this.RemoveFromCartTime);
+    this.RemoveFromCartTime = setTimeout(()=>{
       const {
         cart_items,
         totalPayable,
@@ -124,7 +132,8 @@ class MenuPage extends Component {
       totalCartItems: this.state.totalCartItems+1,
       totalPayable: this.state.totalPayable+addToTotalPayable
     })
-    setTimeout(()=>{
+    !!this.AddMoreToCartTime && clearTimeout(this.AddMoreToCartTime);
+    this.AddMoreToCartTime = setTimeout(()=>{
       const {
         cart_items,
         totalPayable,
@@ -161,8 +170,8 @@ class MenuPage extends Component {
 
   setDataOnLocalStorage(cart_items, totalPayable, totalCartItems) {
     setCartItems(cart_items);
-    setTotalCartItems(totalPayable);
-    setTotalPayable(totalCartItems);
+    setTotalPayable(totalPayable);
+    setTotalCartItems(totalCartItems);
   }
 
   mapDataToState(cart_items, totalPayable, totalCartItems) {

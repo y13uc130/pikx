@@ -1,0 +1,14 @@
+@import '../../theme/variables.scss';
+
+.SuccessModalWrapper {
+  padding: 20px 10px 20px 10px;
+  min-width: 280px;
+  min-height: 250px;
+  .successTxt1 {
+    color: #686b78;
+  }
+  .successTxt2 {
+    margin: 20px 25px 0;
+    color: #7e808c;
+  }
+}

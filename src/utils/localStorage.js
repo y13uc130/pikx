@@ -63,6 +63,8 @@ export function getCartItems() {
   return JSON.parse(localStorage.getItem('cart_items'));
 }
 export function getTotalPayable() {
+  let  x= localStorage.getItem('totalPayable');
+  console.log('x',x);
   return JSON.parse(localStorage.getItem('totalPayable'));
 }
 export function getTotalCartItems() {

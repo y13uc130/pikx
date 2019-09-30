@@ -6,11 +6,14 @@ import EachDishItem from '../MenuPage/EachDishItem';
 import './styles.scss';
 import '../MenuPage/styles.scss';
 import quoteImg from './quotes.svg';
-import { addToCartAction } from '../../services/MenuPage/MenuPageActionCreators';
+import { addToCartAction, resetCartData } from '../../services/MenuPage/MenuPageActionCreators';
 import ImageLoader from '../../components/ImageLoader/ImageLoader';
 import classnames from 'classnames';
 import api from '../../utils/api';
-import { setCartItems, setTotalCartItems, setTotalPayable } from '../../utils/localStorage';
+import { setCartItems, setTotalCartItems, setTotalPayable, clearCartData } from '../../utils/localStorage';
+import FullPageLoader from '../../components/FullPageLoader';
+import SuccessPopupModal from '../../components/SuccessPopupModal/SuccessPopupModal';
+import { addCommas } from '../../utils';
 
 class Cart extends Component {
   constructor(props){
@@ -23,7 +26,8 @@ class Cart extends Component {
       totalPayable: 0,
       loading: false,
       _updated: false,
-      suggestion: ''
+      suggestion: '',
+      successPopup: false
     }
   }
   componentDidMount() {
@@ -43,7 +47,7 @@ class Cart extends Component {
       loading: true
     });
     let cartitem_ids = [];
-    cart_items.map((dish) => {
+    cart_items && cart_items.map((dish) => {
       cartitem_ids.push(dish._id);
       return dish;
     });
@@ -162,8 +166,8 @@ class Cart extends Component {
 
   setDataOnLocalStorage(cart_items, totalPayable, totalCartItems) {
     setCartItems(cart_items);
-    setTotalCartItems(totalPayable);
-    setTotalPayable(totalCartItems);
+    setTotalPayable(totalPayable);
+    setTotalCartItems(totalCartItems);
   }
 
   handleSuggestion = ({target: {value}}) => this.setState({suggestion: value})
@@ -174,6 +178,9 @@ class Cart extends Component {
       cart_items,
       suggestion
      } = this.state;
+     this.setState({
+      loading: true
+    })
 
     let reqBody = {
       suggestion, 
@@ -187,21 +194,37 @@ class Cart extends Component {
     let cartItems = cart_items;
     cartItems && cartItems.map(item=> {
       reqBody.items.push({
-        dish: [
-          {
-            id: item._id,
-            name: item.name,
-            offerPrice: item.offerPrice
-          },
-        ],
+        dish: {
+          _id: item._id,
+          name: item.name,
+          offerPrice: item.offerPrice
+        },
         quantity: item.count
       })
       return item;
     })
-    api.post('/restaurant/order', reqBody).then((res)=> {
+    api.post('/restaurant/order/booking', reqBody).then((res)=> {
       console.log("res",res);
+      if(res && res.data && !!res.data.success) {
+        clearCartData();
+        this.props.resetCartData();
+        this.setState({
+          loading: false,
+          cart_items: [],
+          totalPayable: 0,
+          totalCartItems: 0,
+          successPopup: true
+        })
+      } else {
+        this.setState({
+          loading: false
+        })
+      }
     }).catch(err=>{
       console.log(err);
+      this.setState({
+        loading: false
+      })
     })
   }
 
@@ -209,10 +232,13 @@ class Cart extends Component {
     const {
       cart_items,
       addBtnChange,
-      totalPayable
+      totalPayable,
+      loading,
+      successPopup
     } = this.state;
     return (
       <div className="cartPageWrapper" >
+        {loading && <FullPageLoader />}
         <div className="cartHeader">
           <div className="layout align-center cartHeaderTop">
             <img src={'/psl_static/icons/back.svg'} className="iconNew " onClick={()=>this.props.history.push('/menu')} />
@@ -289,13 +315,13 @@ class Cart extends Component {
             </div>
             <div className="TotalDiscount layout align-center justify-space-between">
               <div className="pa4">Total Discount</div>
-              <div className="discountValue pa4">-₹50</div>
+              <div className="discountValue pa4">-₹30</div>
             </div>
             <div className="borderBottom"></div>
             <div className="layout justify-space-between align-center">
               <div className="flex xs10">
                 <div className="pa3" >Delivery Fee</div>
-                <div className="pa4 green-color" >Free Delivery because you're SUPER!</div>
+                <div className="pa4 green-color">Free Delivery because it's your FIRST!</div>
               </div>
               <div className="pa4 green-color line-through">₹35.00</div>
               <div className="pa4 green-color m-l-5">FREE</div>
@@ -303,7 +329,7 @@ class Cart extends Component {
             <div className="borderBottom"></div>
             <div className="layout align-center justify-space-between">
               <div className="pa3 bold">To Pay</div>
-              <div className="pa3">₹{totalPayable-20}</div>
+              <div className="pa3">₹{addCommas(totalPayable)}</div>
             </div>
           </div>
           </div>
@@ -313,6 +339,7 @@ class Cart extends Component {
             <div className="pa2-white bold m-r-10">{!!cart_items && !!cart_items.length?'PLACE THE ORDER': 'ADD SOMETHING'}</div>
           </div>
         </div>
+        {!!successPopup && <SuccessPopupModal isOpen={successPopup} toggleModal={()=>this.setState({successPopup: !this.state.successPopup})} /> }
       </div>
     )
   }
@@ -334,7 +361,8 @@ export default compose(
   connect(
     mapStateToProps,
     {
-      addToCartAction
+      addToCartAction,
+      resetCartData
     }
   )
 )(Cart);

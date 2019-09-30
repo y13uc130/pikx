@@ -13,6 +13,13 @@ export default (state = initialState, action) => {
         totalPayable: action.data.totalPayable,
         totalCartItems: action.data.totalCartItems
       }
+    case 'RESET_CART_DATA':
+      return {
+        ...state,
+        cart_items: [],
+        totalPayable: 0,
+        totalCartItems: 0
+      }
     default:
       return state;
   }
