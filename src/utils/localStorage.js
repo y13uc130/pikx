@@ -49,7 +49,34 @@ export function getLoginProvider() {
 export function getIsDevelopment() {
   return getValue('isDevelopment');
 }
-
+// main pikx
 export function clearBookingId() {
   removeKey('booking_id');
+}
+export function clearCartData() {
+  removeKey('cart_items');
+  removeKey('totalPayable');
+  removeKey('totalCartItems');
+}
+
+export function getCartItems() {
+  return JSON.parse(localStorage.getItem('cart_items'));
+}
+export function getTotalPayable() {
+  return JSON.parse(localStorage.getItem('totalPayable'));
+}
+export function getTotalCartItems() {
+  return JSON.parse(localStorage.getItem('totalCartItems'));
+}
+
+export function setCartItems(cart_items) {
+  localStorage.setItem('cart_items',JSON.stringify(cart_items))
+}
+    
+export function setTotalPayable(totalPayable) {
+  localStorage.setItem('totalPayable',JSON.stringify(totalPayable))
+}  
+
+export function setTotalCartItems(totalCartItems) {
+  localStorage.setItem('totalCartItems',JSON.stringify(totalCartItems))
 }

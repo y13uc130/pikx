@@ -22,9 +22,7 @@ export class Home extends PureComponent {
     })
     if(!!localStorage.getItem("booking_id")) {
       api.get('/restaurant/menu').then(res=> {
-        console.log('res',res);
         if(res && res.data && !!res.data.success && Array.isArray(res.data.result) && !!res.data.result.length) {
-          console.log(res.data.result);
           this.setState({
             menuData2: res.data.result
           })

@@ -9,6 +9,8 @@ import { addCommas } from '../../utils';
 import { addToCartAction } from '../../services/MenuPage/MenuPageActionCreators';
 import FullPageLoader from '../../components/FullPageLoader';
 import EachDishItem from './EachDishItem';
+import routePath from '../../routePath';
+import { setCartItems, setTotalCartItems, setTotalPayable, getCartItems, getTotalCartItems, getTotalPayable } from '../../utils/localStorage';
 
 class MenuPage extends Component {
 
@@ -26,22 +28,12 @@ class MenuPage extends Component {
   componentDidMount() {
     const { cart_items, totalPayable, totalCartItems } = this.props;
     if(cart_items && !!cart_items.length) {
-      this.setState({
-        loading: true
-      })
-      let cartitem_ids= []
-      cart_items.map((dish)=> {
-        cartitem_ids.push(dish._id);
-        return dish;
-      })
-      this.setState({
-        addBtnChange: this.state.addBtnChange.concat(cartitem_ids),
-        cart_items,
-        totalPayable,
-        noItemAdded: false,
-        totalCartItems,
-        loading: false
-      })
+      this.mapDataToState(cart_items, totalPayable, totalCartItems);
+    } else {
+      let cartItems = getCartItems();
+      let total_cartItems = getTotalCartItems();
+      let total_payable = getTotalPayable();
+      this.mapDataToState(cartItems, total_payable, total_cartItems);
     }
   }
   handleAddClick= ({name,_id, price, offerPrice, image, type}) => {
@@ -68,6 +60,14 @@ class MenuPage extends Component {
       cart_items: [...this.state.cart_items, itemToAdd],
       totalCartItems: this.state.totalCartItems+1,
     })
+    setTimeout(()=>{
+      const {
+        cart_items,
+        totalPayable,
+        totalCartItems
+      } = this.state;
+      this.setDataOnLocalStorage(cart_items, totalPayable, totalCartItems);
+    },100);
   }
   handleRemoveItem = (dish)=> {
     let cart_items = [...this.state.cart_items];
@@ -100,6 +100,14 @@ class MenuPage extends Component {
       totalCartItems: this.state.totalCartItems-1,
       totalPayable: this.state.totalPayable-removeFromTotalPayable
     })
+    setTimeout(()=>{
+      const {
+        cart_items,
+        totalPayable,
+        totalCartItems
+      } = this.state;
+      this.setDataOnLocalStorage(cart_items, totalPayable, totalCartItems);
+    },100);
   }
   handleAddOneMore = (dish)=> {
     let cart_items = [...this.state.cart_items];
@@ -116,12 +124,21 @@ class MenuPage extends Component {
       totalCartItems: this.state.totalCartItems+1,
       totalPayable: this.state.totalPayable+addToTotalPayable
     })
+    setTimeout(()=>{
+      const {
+        cart_items,
+        totalPayable,
+        totalCartItems
+      } = this.state;
+      this.setDataOnLocalStorage(cart_items, totalPayable, totalCartItems);
+    },100);
   }
   handleCart = () => {
     const { cart_items, totalPayable, totalCartItems } = this.state;
     const { history } = this.props;
     this.props.addToCartAction(cart_items, totalPayable, totalCartItems); 
-    history.push('/checkout/cart');
+    this.setDataOnLocalStorage(cart_items, totalPayable, totalCartItems);
+    history.push(routePath.cartPath);
   }
 
   renderEachDishItem = (index, dish) =>{
@@ -142,6 +159,31 @@ class MenuPage extends Component {
     )
   }
 
+  setDataOnLocalStorage(cart_items, totalPayable, totalCartItems) {
+    setCartItems(cart_items);
+    setTotalCartItems(totalPayable);
+    setTotalPayable(totalCartItems);
+  }
+
+  mapDataToState(cart_items, totalPayable, totalCartItems) {
+    this.setState({
+      loading: true
+    });
+    let cartitem_ids = [];
+    cart_items && cart_items.map((dish) => {
+      cartitem_ids.push(dish._id);
+      return dish;
+    });
+    this.setState({
+      addBtnChange: this.state.addBtnChange.concat(cartitem_ids),
+      cart_items,
+      totalPayable,
+      noItemAdded: false,
+      totalCartItems,
+      loading: false
+    });
+  }
+
   render() {
     const {
       noItemAdded,
@@ -150,7 +192,6 @@ class MenuPage extends Component {
       loading,
       addBtnChange
     } = this.state;
-    console.log("addtobtn",addBtnChange);
     const {
       data
     } = this.props;
@@ -163,16 +204,16 @@ class MenuPage extends Component {
       <div className="MenuPage">
         <div className="Categories">
           {
-            Array.isArray(data) && !!data.length && data.map((category)=> {
+            Array.isArray(data) && !!data.length && data.map((category, i)=> {
               return (
-                <React.Fragment>
+                <React.Fragment key={i} >
                   <div className="EachCategory" >
                     <div className="h2">{category._id}</div>
                     <div className="borderBottom"></div>
                     <div className="dishItems">
                       {category.dish.map((dish, index)=>{
                         return (
-                          <React.Fragment>
+                          <React.Fragment key={index} >
                             {this.renderEachDishItem(index, dish)}
                           </React.Fragment>
                         )

@@ -22,6 +22,19 @@
     }
     .DisableDeisgnerForm {
       margin-top: 70px;
+      .sorryMsg {
+        margin-top: 30px;
+      }
+    }
+    .ConnectErrorImg {
+      background-image: url("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,e_trim/empty_500_3x_au34cg");
+      background-repeat: no-repeat;
+      min-height: 200px;
+      width: 100%;
+      padding-bottom: 60%;
+      background-size: contain;
+      background-position: center center;
+      margin: 0 auto;
     }
   }
   .RelatedProducts {

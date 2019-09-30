@@ -12,24 +12,26 @@ import { asyncHome } from './pages';
 import Cart from './pages/Cart';
 import BookingStatus from './pages/BookingStatus/BookingStatus';
 import { NotFound } from './pages/NotFound';
+import routePath from './routePath';
+import NetworkDetector from './Hoc/NetworkDetector';
+
 const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(history, initialState);
 
 class App extends Component {
   render() {
-    console.log('initial state', initialState, store);
 		return (
 			<div className="App">
 				<Provider store={store}>
         <ConnectedRouter history={history}>
           <BrowserRouter>
             <Switch>
-              <Route exact path="/booking/:id" component={BookingStatus} />
-              <Route exact path='/error' component={NotFound} />
-              <Route exact path="/checkout/cart" component={Cart} />
-              <Route exact path="/" component={asyncHome} />
-              <Redirect from='*' to="/" />
+              <Route exact path={routePath.bookingStatusPath} component={BookingStatus} />
+              <Route exact path={routePath.errorPath} component={NotFound} />
+              <Route exact path={routePath.cartPath} component={Cart} />
+              <Route exact path={routePath.homePath} component={asyncHome} />
+              <Redirect from='*' to={routePath.homePath} />
             </Switch>
           </BrowserRouter>
         </ConnectedRouter>
@@ -38,4 +40,4 @@ class App extends Component {
 		);
 	}
 }
-export default App;
+export default NetworkDetector(App);
