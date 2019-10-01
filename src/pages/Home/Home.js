@@ -32,6 +32,7 @@ export class Home extends PureComponent {
         })
       }).catch(err=>{
         console.log(err);
+        history.push('/error');
         this.setState({
           loading: false
         })  

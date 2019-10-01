@@ -27,8 +27,12 @@ class Cart extends Component {
       loading: false,
       _updated: false,
       suggestion: '',
-      successPopup: false
+      successPopup: false,
+      failedPopup: false,
+      outOfDeliveryTime: false
     }
+    this.openingTime = 9;
+    this.closingTime = 23;
   }
   componentDidMount() {
     const { cart_items, totalPayable, totalCartItems } = this.props;
@@ -40,6 +44,17 @@ class Cart extends Component {
       let total_cartItems = JSON.parse(localStorage.getItem('totalCartItems'));
       this.mapDataToState(cartItems, total_payable, total_cartItems);
     }
+  }
+
+  orderAllowed = () => {
+    let currentTime = new Date().getTime();
+    let openingTime = new Date().setHours(this.openingTime, 0, 0, 0);
+    let closingTime = new Date().setHours(this.closingTime, 0, 0, 0);
+    let openToCurrentDifference = Math.floor((currentTime - openingTime)/1000/60);
+    let closeToCurrentDifference = Math.floor((closingTime - currentTime)/1000/60);
+    if(openToCurrentDifference >=0 && closeToCurrentDifference>=0 ) {
+      return true;
+    } return false;
   }
 
   mapDataToState(cart_items, totalPayable, totalCartItems) {
@@ -178,6 +193,12 @@ class Cart extends Component {
       cart_items,
       suggestion
      } = this.state;
+     if(!this.orderAllowed()) {
+       this.setState({
+         outOfDeliveryTime: true
+       })
+       return false;
+     }
      this.setState({
       loading: true
     })
@@ -204,7 +225,6 @@ class Cart extends Component {
       return item;
     })
     api.post('/restaurant/order/booking', reqBody).then((res)=> {
-      console.log("res",res);
       if(res && res.data && !!res.data.success) {
         clearCartData();
         this.props.resetCartData();
@@ -217,13 +237,16 @@ class Cart extends Component {
         })
       } else {
         this.setState({
-          loading: false
+          loading: false,
+          failedPopup : true
         })
+
       }
     }).catch(err=>{
       console.log(err);
       this.setState({
-        loading: false
+        loading: false,
+        failedPopup : true
       })
     })
   }
@@ -234,7 +257,9 @@ class Cart extends Component {
       addBtnChange,
       totalPayable,
       loading,
-      successPopup
+      successPopup,
+      failedPopup,
+      outOfDeliveryTime
     } = this.state;
     return (
       <div className="cartPageWrapper" >
@@ -334,12 +359,14 @@ class Cart extends Component {
           </div>
           </div>
         )}
-        <div className={classnames("cart-preview cartDesign layout", 'showcartpreview')}>
+        <div className={classnames("cart-preview cartDesign layout", 'showcartpreview', outOfDeliveryTime && 'greyShade')}>
           <div onClick={!!cart_items && !!cart_items.length ? this.placeOrder : ()=>this.props.history.push('/menu')} className="layout justify-center align-center">
-            <div className="pa2-white bold m-r-10">{!!cart_items && !!cart_items.length?'PLACE THE ORDER': 'ADD SOMETHING'}</div>
+            {!outOfDeliveryTime && <div className="pa2-white bold m-r-10">{!!cart_items && !!cart_items.length?'PLACE THE ORDER': 'ADD SOMETHING'}</div>}
+            {!!outOfDeliveryTime && <div className="pa2-white bold m-r-10">CLOSED FOR DELIVERY</div>}
           </div>
         </div>
         {!!successPopup && <SuccessPopupModal isOpen={successPopup} toggleModal={()=>this.setState({successPopup: !this.state.successPopup})} /> }
+        {!!failedPopup && <SuccessPopupModal isOpen={failedPopup} toggleModal={()=>this.setState({failedPopup: !this.state.failedPopup})} failed={true} />}
       </div>
     )
   }
