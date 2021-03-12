@@ -41,7 +41,7 @@
     "query-string": "^6.2.0",
     "rc-tabs": "^9.6.0",
     "react": "^16.7.0",
-    "react-dev-utils": "^7.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.7.0",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.6.3",
